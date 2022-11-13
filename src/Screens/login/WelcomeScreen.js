@@ -12,9 +12,9 @@ const WelcomeScreen = ({ navigation }) => {
         resizeMode={"cover"}
       /> */}
       <Icon
-        style={[tw`h-30 mt-7 ml-33 `, { fontSize: 120 }]}
+        style={[tw`h-20 mt-7  `, { fontSize: 82, textAlign: "center" }]}
         name="heartbeat"
-        size={80}
+        size={60}
         color="#e95420"
       />
 
@@ -23,7 +23,7 @@ const WelcomeScreen = ({ navigation }) => {
         source={require("../../Assets/Images/luniva.png")}
         resizeMode={"cover"}
       /> */}
-      <Text style={[tw` text-center mt-4 text-5xl`, { color: "#e95420" }]}>
+      <Text style={[tw` text-center mt-4 text-3xl`, { color: "#e95420" }]}>
         Luniva<Text style={{ color: "#7b7b7b" }}>360</Text>
       </Text>
       <Text style={[tw` mt-3 text-center text-gray-400 font-medium text-sm`]}>
@@ -31,7 +31,7 @@ const WelcomeScreen = ({ navigation }) => {
         {"\n"}love for seeking online medical help
       </Text>
       <Image
-        style={tw`h-74 w-55 mt-6 ml-20 `}
+        style={tw`h-64 w-55 mt-6 ml-20 `}
         source={require("../../Assets/Images/Default.png")}
         resizeMode={"cover"}
       />

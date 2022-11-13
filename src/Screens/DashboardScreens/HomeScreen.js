@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  Button,
 } from "react-native";
 import React from "react";
 import tw from "twrnc";
@@ -12,8 +13,10 @@ import FeaturesCarousel from "../../Components/FeaturesCarousel";
 import TestCheckups from "../../Components/Test&Checkups";
 import CardFeatures from "../../Components/CardFeatures";
 import Specialist from "../../Components/Specialist";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={[{ flex: 1, backgroundColor: "white" }]}>

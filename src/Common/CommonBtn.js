@@ -8,14 +8,14 @@ const CommonBtn = ({ title, navigateTo }) => {
   return (
     <TouchableOpacity
       style={[
-        tw`w-75 h-13  mt-15 mx-auto flex justify-center rounded-md `,
+        tw`w-75 h-13  mt-10 mx-auto flex justify-center rounded-md `,
         { backgroundColor: "#205072" },
       ]}
       onPress={() => {
         navigation.navigate(navigateTo);
       }}
     >
-      <Text style={tw`text-center text-white font-thin`}>{title}</Text>
+      <Text style={[tw`text-center text-white font-normal`]}>{title}</Text>
     </TouchableOpacity>
   );
 };

@@ -3,18 +3,22 @@ import React from "react";
 import CommonHeader from "../../Common/CommonHeader";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import LabReportsHospitals from "./LabReportsHospitals";
+import { useNavigation } from "@react-navigation/native";
 
 const WIDTH = Dimensions.get("window").width;
 
 const LabReports = () => {
   const pageTitle = "View Lab Reports";
 
+  const navigation = useNavigation();
+
   const data = [
     {
       id: 1,
-      title: "View you report",
+      title: "View your report",
       img: require("../../Assets/Images/viewreport.png"),
       desc: "Scanning QR code/Credentials Input",
+      nav: "ViewYourReport",
     },
     {
       id: 2,
@@ -30,7 +34,7 @@ const LabReports = () => {
       <View>
         {data.map((item) => {
           return (
-            <>
+            <View key={item.id}>
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
@@ -38,6 +42,7 @@ const LabReports = () => {
                   // borderWidth: 2,
                   padding: 20,
                 }}
+                onPress={() => navigation.navigate(item.nav)}
               >
                 <Image source={item.img} style={{ height: 70, width: 70 }} />
                 <View style={{ margin: 5 }}>
@@ -65,7 +70,7 @@ const LabReports = () => {
                   height: 1,
                 }}
               ></View>
-            </>
+            </View>
           );
         })}
       </View>

@@ -1,41 +1,128 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { useNavigation } from "@react-navigation/native";
+import { Camera, CameraType } from "expo-camera";
+import { useState } from "react";
+import {
+  Button,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+
+const HEIGHT = Dimensions.get("window").height;
+const width = Dimensions.get("window").width;
 
 export default function QrCodeScanner() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
+  const navigation = useNavigation();
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    };
+  const maskRowHeight = Math.round((HEIGHT - 300) / 20);
+  const maskColWidth = (width - 300) / 2;
 
-    getBarCodeScannerPermissions();
-  }, []);
-
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
-
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
   }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: "center" }}>
+          We need your permission to show the camera
+        </Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
   }
 
   return (
-    <View>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )}
+    <View style={[styles.container]}>
+      <Camera style={styles.camera} type={type}>
+        <View
+          style={{
+            paddingBottom: 5,
+            backgroundColor: "white",
+            flexDirection: "row",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <Icon
+              style={{ marginLeft: 20, marginTop: 20 }}
+              name="arrow-back"
+              size={30}
+              color="black"
+            />
+          </TouchableOpacity>
+          <Text style={{ marginLeft: 20, marginTop: 20, fontSize: 18 }}>
+            Scan QR code
+          </Text>
+        </View>
+        <View style={styles.maskOutter}>
+          <View
+            style={[{ flex: maskRowHeight }, styles.maskRow, styles.maskFrame]}
+          />
+          <View style={[{ flex: 30 }, styles.maskCenter]}>
+            <View style={[{ width: maskColWidth }, styles.maskFrame]} />
+            <View style={styles.maskInner} />
+            <View style={[{ width: maskColWidth }, styles.maskFrame]} />
+          </View>
+          <View
+            style={[{ flex: maskRowHeight }, styles.maskRow, styles.maskFrame]}
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+                marginTop: "auto",
+                marginBottom: "auto",
+                fontSize: 18,
+              }}
+            >
+              Place the QR Code in the Frame Above.
+            </Text>
+          </View>
+        </View>
+      </Camera>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  camera: {
+    flex: 1,
+  },
+  maskOutter: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  maskInner: {
+    width: 300,
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderWidth: 1,
+  },
+  maskFrame: {
+    backgroundColor: "rgba(1,1,1,0.6)",
+  },
+  maskRow: {
+    width: "100%",
+  },
+  maskCenter: { flexDirection: "row" },
+});

@@ -3,7 +3,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../../Screens/DashboardScreens/HomeScreen";
 import Report from "../../Screens/DashboardScreens/Report";
-import Scan from "../../Screens/DashboardScreens/Scan";
 import Appointment from "../../Screens/DashboardScreens/Appointment";
 import Profile from "../../Screens/DashboardScreens/Profile";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -106,7 +105,11 @@ const BottomNavigation = () => {
         options={{ tabBarBadge: 3 }}
       />
       <Tab.Screen name="Report" component={Report} />
-      <Tab.Screen name="Scan" component={QrCodeScanner} />
+      {/* <Tab.Screen
+        name="Scan"
+        component={QrCodeScanner}
+        options={{ tabBarStyle: { display: "none" } }}
+      /> */}
       <Tab.Screen name="Appointment" component={Appointment} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

@@ -1,12 +1,14 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import tw from "twrnc";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import BottomNavigation from "../Components/Navigation/BottomNavigation";
+import { useNavigation } from "@react-navigation/native";
 
 const WIDTH = Dimensions.get("window").width;
 
 const Dashboard = () => {
+  const navigation = useNavigation();
   return (
     <>
       <View>
@@ -32,11 +34,23 @@ const Dashboard = () => {
               name="notifications"
               size={30}
               color="#555555"
-              style={tw`ml-25 mt-3`}
+              style={tw`ml-15 mt-3`}
             />
           </TouchableOpacity>
           <TouchableOpacity>
             <Icon name="call" size={30} color="#555555" style={tw`ml-4 mt-3`} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("QrCodeScanner");
+            }}
+          >
+            <Icon
+              name="qr-code-scanner"
+              size={30}
+              color="#555555"
+              style={tw`ml-4 mt-3`}
+            />
           </TouchableOpacity>
         </View>
       </View>

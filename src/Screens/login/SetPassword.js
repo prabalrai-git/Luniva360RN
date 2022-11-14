@@ -1,33 +1,90 @@
-import { View, Text, TextInput } from "react-native";
-import React from "react";
+import { View, Text, TextInput, Pressable } from "react-native";
+import React, { useState } from "react";
 import Backbtn from "../../Common/Backbtn";
-import StarOfLife from "../../Common/StarOfLife";
 import tw from "twrnc";
 import CommonBtn from "../../Common/CommonBtn";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const SetPassword = () => {
+  const [show, setShow] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+  const onChangeData = () => {
+    setShow(false);
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Backbtn />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: 20,
-        }}
-      >
-        <StarOfLife />
-        <StarOfLife />
-      </View>
-      <Text style={[tw`text-center mt-5 text-2xl`, { color: "#205072" }]}>
-        Set Your Password
+
+      <Text style={[tw`text-center mt-10 text-3xl`, { color: "#205072" }]}>
+        Create Profile
       </Text>
       <TextInput
         style={[
-          tw`w-70 mx-auto mt-15`,
+          tw`w-70 mx-auto mt-10`,
+          { borderBottomColor: "grey", borderBottomWidth: 0.5 },
+        ]}
+        placeholder="Full Name"
+      />
+      <TextInput
+        style={[
+          tw`w-70 mx-auto mt-10`,
+          { borderBottomColor: "grey", borderBottomWidth: 0.5 },
+        ]}
+        placeholder="Address"
+      />
+      <Pressable onPress={() => setShow(true)} style={{ marginTop: 30 }}>
+        {/* <TextInput
+          style={[
+            tw`w-70 mx-auto mt-10`,
+            { borderBottomColor: "grey", borderBottomWidth: 0.5 },
+          ]}
+          placeholder="DOB"
+        /> */}
+        <Text style={{ marginLeft: 56, color: "grey" }}>
+          DOB (Date of Birth)
+        </Text>
+        <View
+          style={{
+            width: "73%",
+            height: 1,
+            backgroundColor: "grey",
+            marginRight: "auto",
+            marginLeft: "auto",
+          }}
+        ></View>
+      </Pressable>
+      {
+        show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            // timeZoneOffsetInMinutes={0}
+            value={date}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={onChangeData}
+            maximumDate={new Date()}
+          />
+        )
+
+        // <Text>Potato</Text>
+      }
+      <TextInput
+        style={[
+          tw`w-70 mx-auto mt-10`,
+          { borderBottomColor: "grey", borderBottomWidth: 0.5 },
+        ]}
+        placeholder="Gender"
+      />
+      <TextInput
+        style={[
+          tw`w-70 mx-auto mt-10`,
           { borderBottomColor: "grey", borderBottomWidth: 0.5 },
         ]}
         placeholder="New Password"
+        secureTextEntry={true}
       />
       <TextInput
         style={[
@@ -35,8 +92,10 @@ const SetPassword = () => {
           { borderBottomColor: "grey", borderBottomWidth: 0.5 },
         ]}
         placeholder="Re-Type Password"
+        secureTextEntry={true}
       />
-      <CommonBtn title={"Save & Login"} />
+
+      <CommonBtn title={"Create"} navigateTo={"Login"} />
     </View>
   );
 };

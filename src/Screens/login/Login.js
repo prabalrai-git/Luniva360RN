@@ -20,15 +20,15 @@ const Login = () => {
           },
         ]}
       >
-        <StarOfLife />
-        <StarOfLife />
+        {/* <StarOfLife />
+        <StarOfLife /> */}
       </View>
       <Text
         style={[tw`text-center mt-7 text-5xl font-thin`, { color: "#205072" }]}
       >
         Login
       </Text>
-      <Text style={[tw`text-center mt-4 text-lg mb-10`, { color: "grey" }]}>
+      <Text style={[tw`text-center mt-4 text-sm mb-10`, { color: "grey" }]}>
         Enter Your Login Details To Access{"\n"} Your Account
       </Text>
       <View style={[tw`mx-auto mb-10`, styles.inputSection]}>
@@ -51,7 +51,11 @@ const Login = () => {
           color="#e95420"
           style={[tw`ml-3`, styles.inputIcon]}
         />
-        <TextInput style={styles.input} placeholder="Password" />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}
+        />
       </View>
       <CommonBtn title={"Login"} navigateTo={"Dashboard"} />
     </View>
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: "white",
     width: 300,
-    borderRadius: 4,
+    borderRadius: 2,
   },
   inputIcon: {
     padding: 14,

@@ -23,11 +23,13 @@ const OTPVerification = () => {
           marginTop: 20,
         }}
       >
-        <StarOfLife />
-        <StarOfLife />
+        {/* <StarOfLife />
+        <StarOfLife /> */}
       </View>
-      <Text style={[tw`text-center text-2xl mt-5`, { color: "#205072" }]}>
-        Verify Your Number With {"\n"} Code Sent To You
+      <Text style={tw`text-4xl text-center mt-5`}>Verification</Text>
+
+      <Text style={[tw`text-center text-sm mt-5`, { color: "#205072" }]}>
+        You will get an OTP via SMS or Email
       </Text>
       <TextInput
         style={[
@@ -36,13 +38,18 @@ const OTPVerification = () => {
         ]}
         placeholder="Received Code"
         keyboardType="numeric"
+        secureTextEntry={true}
       />
+      <CommonBtn title={"Verify"} navigateTo={"SetPassword"} />
       <TouchableOpacity>
         <Text style={[tw`text-center mt-10 font-bold`, { color: "#e95420" }]}>
-          Receive the Code, Resend Code?
+          <Text style={{ color: "grey" }}>
+            Didn't Receive the verification OTP?
+          </Text>
+          {"  "}
+          Resend Code?
         </Text>
       </TouchableOpacity>
-      <CommonBtn title={"Continue"} navigateTo={"SetPassword"} />
     </View>
   );
 };

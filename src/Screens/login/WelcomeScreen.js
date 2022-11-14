@@ -31,7 +31,7 @@ const WelcomeScreen = ({ navigation }) => {
         {"\n"}love for seeking online medical help
       </Text>
       <Image
-        style={tw`h-64 w-55 mt-6 ml-20 `}
+        style={tw`h-84 w-55 mt-6 mx-auto`}
         source={require("../../Assets/Images/Default.png")}
         resizeMode={"cover"}
       />

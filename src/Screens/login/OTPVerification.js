@@ -41,15 +41,29 @@ const OTPVerification = () => {
         secureTextEntry={true}
       />
       <CommonBtn title={"Verify"} navigateTo={"SetPassword"} />
-      <TouchableOpacity>
-        <Text style={[tw`text-center mt-10 font-bold`, { color: "#e95420" }]}>
-          <Text style={{ color: "grey" }}>
-            Didn't Receive the verification OTP?
-          </Text>
-          {"  "}
+      <Text
+        style={{
+          color: "grey",
+          textAlign: "center",
+          marginTop: 18,
+        }}
+      >
+        Didn't Receive the verification OTP?
+        <Text
+          style={[
+            tw`  font-bold`,
+            {
+              color: "#e95420",
+              textDecorationLine: "underline",
+              // backgroundColor: "black",
+            },
+          ]}
+          onPress={() => console.log("hello world")}
+        >
+          {" "}
           Resend Code?
         </Text>
-      </TouchableOpacity>
+      </Text>
     </View>
   );
 };

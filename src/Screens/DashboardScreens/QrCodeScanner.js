@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Button,
   Dimensions,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -34,7 +35,27 @@ export default function QrCodeScanner() {
         <Text style={{ textAlign: "center" }}>
           We need your permission to show the camera
         </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <TouchableOpacity
+          onPress={requestPermission}
+          style={{
+            width: "60%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: 14,
+            backgroundColor: "#205072",
+            marginTop: 10,
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              textAlign: "center",
+            }}
+          >
+            Grant Permission
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
